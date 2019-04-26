@@ -16,10 +16,10 @@ NEWSPIDER_MODULE = 'douban_moive_top.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'douban_moive_top (+http://www.yourdomain.com)'
+USER_AGENT = 'douban_moive_top (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
