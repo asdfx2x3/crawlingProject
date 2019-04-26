@@ -64,9 +64,9 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'douban_moive_top.pipelines.DoubanMoiveTopPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'douban_moive_top.pipelines.DoubanMoiveTopPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +88,8 @@ DOWNLOAD_DELAY = 3
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# MONGO数据库相关设置
+MONGO_URI = 'localhost'
+# 数据库的名字
+MONGO_DB = 'douban_movie_top'
