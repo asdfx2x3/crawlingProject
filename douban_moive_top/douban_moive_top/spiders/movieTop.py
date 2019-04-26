@@ -20,6 +20,9 @@ class MovietopSpider(scrapy.Spider):
             }
 
         next_page = response.xpath('//*[@id="content"]/div/div[1]/div[2]/span[3]/a/@href').extract_first()
+        # 如果每个页面都有下一页的话就执行 if 代码块.
         if next_page:
-            next_page_real = response.urljoin(next_page)
-            yield scrapy.Request(next_page_real, callback=self.parse, dont_filter=True)
+            # 使用 urljoin 方法拼接前往下一页的 url
+            next_page_url = response.urljoin(next_page)
+            # 使用回调函数循环得到第一页以后的多有内容
+            yield scrapy.Request(next_page_url, callback=self.parse, dont_filter=True)
