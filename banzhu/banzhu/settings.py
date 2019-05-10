@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for biquge project
+# Scrapy settings for banzhu project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'biquge'
+BOT_NAME = 'banzhu'
 
-SPIDER_MODULES = ['biquge.spiders']
-NEWSPIDER_MODULE = 'biquge.spiders'
+SPIDER_MODULES = ['banzhu.spiders']
+NEWSPIDER_MODULE = 'banzhu.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'biquge (+http://www.yourdomain.com)'
+#USER_AGENT = 'banzhu (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -27,7 +27,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+#DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -47,14 +47,15 @@ DOWNLOAD_DELAY = 3
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'biquge.middlewares.BiqugeSpiderMiddleware': 543,
+#    'banzhu.middlewares.BanzhuSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'biquge.middlewares.BiqugeDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'banzhu.middlewares.BanzhuUserAgentMiddleware': 543,
+   'banzhu.middlewares.ProxyMiddleWare': 545,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +65,9 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'biquge.pipelines.BiqugePipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'banzhu.pipelines.MongoPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -83,8 +84,13 @@ DOWNLOAD_DELAY = 3
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
-HTTPCACHE_EXPIRATION_SECS = 0
-HTTPCACHE_DIR = 'httpcache'
-HTTPCACHE_IGNORE_HTTP_CODES = []
-HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_ENABLED = True
+#HTTPCACHE_EXPIRATION_SECS = 0
+#HTTPCACHE_DIR = 'httpcache'
+#HTTPCACHE_IGNORE_HTTP_CODES = []
+#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+MONGO_URI = 'localhost:27017'
+MONGO_DB = 'banzhu'
+
+PROXY_URL = 'localhost:5010/get'

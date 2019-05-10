@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for biquge project
+# Scrapy settings for guoke project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'biquge'
+BOT_NAME = 'guoke'
 
-SPIDER_MODULES = ['biquge.spiders']
-NEWSPIDER_MODULE = 'biquge.spiders'
+SPIDER_MODULES = ['guoke.spiders']
+NEWSPIDER_MODULE = 'guoke.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'biquge (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -46,15 +46,15 @@ DOWNLOAD_DELAY = 3
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'biquge.middlewares.BiqugeSpiderMiddleware': 543,
-#}
+# SPIDER_MIDDLEWARES = {
+# }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'biquge.middlewares.BiqugeDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'guoke.middlewares.GuokeUserAgentMiddleware': 543,
+   'guoke.middlewares.ProxyMiddleWare': 545,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +64,10 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'biquge.pipelines.BiqugePipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'guoke.pipelines.GuokePipeline': 300,
+   'guoke.pipelines.MongoPipeline': 305,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -83,8 +84,12 @@ DOWNLOAD_DELAY = 3
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
-HTTPCACHE_EXPIRATION_SECS = 0
-HTTPCACHE_DIR = 'httpcache'
-HTTPCACHE_IGNORE_HTTP_CODES = []
-HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_ENABLED = True
+#HTTPCACHE_EXPIRATION_SECS = 0
+#HTTPCACHE_DIR = 'httpcache'
+#HTTPCACHE_IGNORE_HTTP_CODES = []
+#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+PROXY_URL = 'localhost:5010/get'
+MONGO_URI = 'localhost'
+MONGO_DB = 'guoke'

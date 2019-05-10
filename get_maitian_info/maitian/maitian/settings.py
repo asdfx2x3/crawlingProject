@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for biquge project
+# Scrapy settings for maitian project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'biquge'
+BOT_NAME = 'maitian'
 
-SPIDER_MODULES = ['biquge.spiders']
-NEWSPIDER_MODULE = 'biquge.spiders'
+SPIDER_MODULES = ['maitian.spiders']
+NEWSPIDER_MODULE = 'maitian.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'biquge (+http://www.yourdomain.com)'
+#USER_AGENT = 'maitian (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -27,7 +27,7 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -47,14 +47,15 @@ DOWNLOAD_DELAY = 3
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'biquge.middlewares.BiqugeSpiderMiddleware': 543,
+#    'maitian.middlewares.MaitianSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'biquge.middlewares.BiqugeDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'maitian.middlewares.MaitianUserAgentMiddleware': 543,
+   'maitian.middlewares.ProxyMiddleware': 545,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -64,9 +65,10 @@ DOWNLOAD_DELAY = 3
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'biquge.pipelines.BiqugePipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'maitian.pipelines.MaitianPipeline': 300,
+   'maitian.pipelines.MongoPipeline': 305,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -79,12 +81,19 @@ DOWNLOAD_DELAY = 3
 # each remote server
 #AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+#AUTOTHROTTLE_DEBUG = Fals as f:e
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
-HTTPCACHE_EXPIRATION_SECS = 0
-HTTPCACHE_DIR = 'httpcache'
-HTTPCACHE_IGNORE_HTTP_CODES = []
-HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+#HTTPCACHE_ENABLED = True
+#HTTPCACHE_EXPIRATION_SECS = 0
+#HTTPCACHE_DIR = 'httpcache'
+#HTTPCACHE_IGNORE_HTTP_CODES = []
+#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+PROXY_URL = 'http://localhost:5010/get'
+
+# 数据库地址
+MONGO_URI = 'localhost'
+# 库名
+MONGO_DB = 'maitian_info'

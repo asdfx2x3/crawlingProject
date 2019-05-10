@@ -9,6 +9,14 @@ import scrapy
 
 
 class BiqugeItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+
+    # id
+    novel_id = scrapy.Field()
+    # 小说名字
+    name = scrapy.Field()
+    # 卓和名字
+    author = scrapy.Field()
+    # 小说链接
+    url = scrapy.Field()
+    # 小说简介
+    content = scrapy.Field()
