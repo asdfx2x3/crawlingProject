@@ -108,3 +108,6 @@ venv.bak/
 
 # system cache
 .DS_Store
+
+# vscode
+.vscode
