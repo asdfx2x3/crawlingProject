@@ -12,12 +12,13 @@ class NovelSpider(CrawlSpider):
 
     rules = (
         Rule(LinkExtractor(allow=r'/\d_\d+.html', restrict_xpaths='//div[@id="pagelink"]'), follow=True),
-
+        Rule(LinkExtractor(allow=r'/\w+/', restrict_xpaths='//div[@class="nav"]'), follow=True),
         Rule(LinkExtractor(allow=r'/\d+_\d+/\d+.html'), callback='parse_item', follow=True),
     )
 
     def parse_item(self, response):
         item = BanzhuItem()
+        item['category'] = response.xpath('//div[@class="content_read"]/div/div/a[2]/text()').get()
         item['title'] = response.xpath('//div[@class="content_read"]/div/div/a[3]/text()').get()
         item['chap_name'] = ''.join(response.xpath('//div[@class="content_read"]/div/div[@class="con_top"]/text()').getall()).split('>')[-1].strip()
         item['content'] = '\n'.join(response.xpath('//*[@id="content"]//text()').getall()).strip()

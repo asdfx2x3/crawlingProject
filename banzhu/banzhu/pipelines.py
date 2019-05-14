@@ -27,8 +27,8 @@ class MongoPipeline(object):
 
     def process_item(self, item, spider):
         name = item['title']
-        # self.db[name].insert(dict(item))
-        self.db[name].insert({"chap_name": item['chap_name'],
+        self.db[name].insert({"category": item['category'],
+                              "chap_name":item['chap_name'],
                               "content": item['content']})
         return item
 

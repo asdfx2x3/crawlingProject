@@ -11,6 +11,8 @@ import scrapy
 class BanzhuItem(scrapy.Item):
     # 小说名
     title = scrapy.Field()
+    # 类型
+    category = scrapy.Field()
     # 章节名
     chap_name = scrapy.Field()
     # 章节正文
