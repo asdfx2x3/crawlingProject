@@ -1,0 +1,374 @@
+<div class="post-layout">
+            <div class="votecell post-layout--left">
+
+
+<div class="js-voting-container grid fd-column ai-stretch gs4 fc-black-200" data-post-id="231855">
+        <button class="js-vote-up-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is useful" aria-pressed="false" aria-label="up vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowUpLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 26h32L18 10 2 26z"></path></svg></button>
+        <div class="js-vote-count grid--cell fc-black-500 fs-title grid fd-column ai-center" itemprop="upvoteCount" data-value="13359">13359</div>
+        <button class="js-vote-down-btn grid--cell s-btn s-btn__unset c-pointer" title="This answer is not useful" aria-pressed="false" aria-label="down vote" data-selected-classes="fc-theme-primary"><svg aria-hidden="true" class="svg-icon m0 iconArrowDownLg" width="36" height="36" viewBox="0 0 36 36"><path d="M2 10h32L18 26 2 10z"></path></svg></button>
+
+
+                <div class="js-accepted-answer-indicator grid--item fc-green-500 ta-center p4" title="loading when this answer was accepted..." tabindex="0" role="note" aria-label="accepted"><svg aria-hidden="true" class="svg-icon iconCheckmarkLg" width="36" height="36" viewBox="0 0 36 36"><path d="M6 14l8 8L30 6v8L14 30l-8-8v-8z"></path></svg></div>
+<div class="bounty-award-container grid--cell"><span class="bounty-award d-block ta-center" title="This answer has been awarded bounties worth 550 reputation by alecxe and ytpillai">+550</span></div>
+</div>
+
+            </div>
+
+
+<div class="answercell post-layout--right">
+
+    <div class="post-text" itemprop="text">
+<p>To understand what <code>yield</code> does, you must understand what <em>generators</em> are. And before you can understand generators, you must understand <em>iterables</em>.</p>
+
+<h2>Iterables</h2>
+
+<p>When you create a list, you can read its items one by one. Reading its items one by one is called iteration:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> mylist </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">]</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> mylist</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)</span><span class="pln">
+</span><span class="lit">1</span><span class="pln">
+</span><span class="lit">2</span><span class="pln">
+</span><span class="lit">3</span></code></pre>
+
+<p><code>mylist</code> is an <em>iterable</em>. When you use a list comprehension, you create a list, and so an iterable:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> mylist </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln">x</span><span class="pun">*</span><span class="pln">x </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">3</span><span class="pun">)]</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> mylist</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)</span><span class="pln">
+</span><span class="lit">0</span><span class="pln">
+</span><span class="lit">1</span><span class="pln">
+</span><span class="lit">4</span></code></pre>
+
+<p>Everything you can use "<code>for... in...</code>" on is an iterable; <code>lists</code>, <code>strings</code>, files...</p>
+
+<p>These iterables are handy because you can read them as much as you wish, but you store all the values in memory and this is not always what you want when you have a lot of values.</p>
+
+<h2>Generators</h2>
+
+<p>Generators are iterators, a kind of iterable <strong>you can only iterate over once</strong>. Generators do not store all the values in memory, <strong>they generate the values on the fly</strong>:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> mygenerator </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">x</span><span class="pun">*</span><span class="pln">x </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">3</span><span class="pun">))</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> mygenerator</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)</span><span class="pln">
+</span><span class="lit">0</span><span class="pln">
+</span><span class="lit">1</span><span class="pln">
+</span><span class="lit">4</span></code></pre>
+
+<p>It is just the same except you used <code>()</code> instead of <code>[]</code>. BUT, you <strong>cannot</strong> perform <code>for i in mygenerator</code> a second time since generators can only be used once: they calculate 0, then forget about it and calculate 1, and end calculating 4, one by one.</p>
+
+<h2>Yield</h2>
+
+<p><code>yield</code> is a keyword that is used like <code>return</code>, except the function will return a generator.</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">def</span><span class="pln"> createGenerator</span><span class="pun">():</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    mylist </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">3</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    </span><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> mylist</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">        </span><span class="kwd">yield</span><span class="pln"> i</span><span class="pun">*</span><span class="pln">i
+</span><span class="pun">...</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> mygenerator </span><span class="pun">=</span><span class="pln"> createGenerator</span><span class="pun">()</span><span class="pln"> </span><span class="com"># create a generator</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">mygenerator</span><span class="pun">)</span><span class="pln"> </span><span class="com"># mygenerator is an object!</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">generator object createGenerator at </span><span class="lit">0xb7555c34</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> mygenerator</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">     </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)</span><span class="pln">
+</span><span class="lit">0</span><span class="pln">
+</span><span class="lit">1</span><span class="pln">
+</span><span class="lit">4</span></code></pre>
+
+<p>Here it's a useless example, but it's handy when you know your function will return a huge set of values that you will only need to read once.</p>
+
+<p>To master <code>yield</code>, you must understand that <strong>when you call the function, the code you have written in the function body does not run.</strong> The function only returns the generator object, this is a bit tricky :-)</p>
+
+<p>Then, your code will continue from where it left off each time <code>for</code> uses the generator.</p>
+
+<p>Now the hard part:</p>
+
+<p>The first time the <code>for</code> calls the generator object created from your function, it will run the code in your function from the beginning until it hits <code>yield</code>, then it'll return the first value of the loop. Then, each other call will run the loop you have written in the function one more time, and return the next value, until there is no value to return.</p>
+
+<p>The generator is considered empty once the function runs, but does not hit <code>yield</code> anymore. It can be because the loop had come to an end, or because you do not satisfy an <code>"if/else"</code> anymore.</p>
+
+<hr>
+
+<h2>Your code explained</h2>
+
+<p>Generator:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="com"># Here you create the method of the node object that will return the generator</span><span class="pln">
+</span><span class="kwd">def</span><span class="pln"> _get_child_candidates</span><span class="pun">(</span><span class="pln">self</span><span class="pun">,</span><span class="pln"> distance</span><span class="pun">,</span><span class="pln"> min_dist</span><span class="pun">,</span><span class="pln"> max_dist</span><span class="pun">):</span><span class="pln">
+
+    </span><span class="com"># Here is the code that will be called each time you use the generator object:</span><span class="pln">
+
+    </span><span class="com"># If there is still a child of the node object on its left</span><span class="pln">
+    </span><span class="com"># AND if distance is ok, return the next child</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_leftchild </span><span class="kwd">and</span><span class="pln"> distance </span><span class="pun">-</span><span class="pln"> max_dist </span><span class="pun">&lt;</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_median</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">yield</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_leftchild
+
+    </span><span class="com"># If there is still a child of the node object on its right</span><span class="pln">
+    </span><span class="com"># AND if distance is ok, return the next child</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_rightchild </span><span class="kwd">and</span><span class="pln"> distance </span><span class="pun">+</span><span class="pln"> max_dist </span><span class="pun">&gt;=</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_median</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">yield</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_rightchild
+
+    </span><span class="com"># If the function arrives here, the generator will be considered empty</span><span class="pln">
+    </span><span class="com"># there is no more than two values: the left and the right children</span></code></pre>
+
+<p>Caller:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="com"># Create an empty list and a list with the current object reference</span><span class="pln">
+result</span><span class="pun">,</span><span class="pln"> candidates </span><span class="pun">=</span><span class="pln"> list</span><span class="pun">(),</span><span class="pln"> </span><span class="pun">[</span><span class="pln">self</span><span class="pun">]</span><span class="pln">
+
+</span><span class="com"># Loop on candidates (they contain only one element at the beginning)</span><span class="pln">
+</span><span class="kwd">while</span><span class="pln"> candidates</span><span class="pun">:</span><span class="pln">
+
+    </span><span class="com"># Get the last candidate and remove it from the list</span><span class="pln">
+    node </span><span class="pun">=</span><span class="pln"> candidates</span><span class="pun">.</span><span class="pln">pop</span><span class="pun">()</span><span class="pln">
+
+    </span><span class="com"># Get the distance between obj and the candidate</span><span class="pln">
+    distance </span><span class="pun">=</span><span class="pln"> node</span><span class="pun">.</span><span class="pln">_get_dist</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">)</span><span class="pln">
+
+    </span><span class="com"># If distance is ok, then you can fill the result</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> distance </span><span class="pun">&lt;=</span><span class="pln"> max_dist </span><span class="kwd">and</span><span class="pln"> distance </span><span class="pun">&gt;=</span><span class="pln"> min_dist</span><span class="pun">:</span><span class="pln">
+        result</span><span class="pun">.</span><span class="pln">extend</span><span class="pun">(</span><span class="pln">node</span><span class="pun">.</span><span class="pln">_values</span><span class="pun">)</span><span class="pln">
+
+    </span><span class="com"># Add the children of the candidate in the candidates list</span><span class="pln">
+    </span><span class="com"># so the loop will keep running until it will have looked</span><span class="pln">
+    </span><span class="com"># at all the children of the children of the children, etc. of the candidate</span><span class="pln">
+    candidates</span><span class="pun">.</span><span class="pln">extend</span><span class="pun">(</span><span class="pln">node</span><span class="pun">.</span><span class="pln">_get_child_candidates</span><span class="pun">(</span><span class="pln">distance</span><span class="pun">,</span><span class="pln"> min_dist</span><span class="pun">,</span><span class="pln"> max_dist</span><span class="pun">))</span><span class="pln">
+
+</span><span class="kwd">return</span><span class="pln"> result</span></code></pre>
+
+<p>This code contains several smart parts:</p>
+
+<ul>
+<li><p>The loop iterates on a list, but the list expands while the loop is being iterated :-) It's a concise way to go through all these nested data even if it's a bit dangerous since you can end up with an infinite loop. In this case, <code>candidates.extend(node._get_child_candidates(distance, min_dist, max_dist))</code> exhausts all the values of the generator, but <code>while</code> keeps creating new generator objects which will produce different values from the previous ones since it's not applied on the same node.</p></li>
+<li><p>The <code>extend()</code> method is a list object method that expects an iterable and adds its values to the list.</p></li>
+</ul>
+
+<p>Usually we pass a list to it:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">]</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">]</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> a</span><span class="pun">.</span><span class="pln">extend</span><span class="pun">(</span><span class="pln">b</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">a</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">]</span></code></pre>
+
+<p>But in your code it gets a generator, which is good because:</p>
+
+<ol>
+<li>You don't need to read the values twice.</li>
+<li>You may have a lot of children and you don't want them all stored in memory.</li>
+</ol>
+
+<p>And it works because Python does not care if the argument of a method is a list or not. Python expects iterables so it will work with strings, lists, tuples and generators! This is called duck typing and is one of the reason why Python is so cool. But this is another story, for another question...</p>
+
+<p>You can stop here, or read a little bit to see an advanced use of a generator:</p>
+
+<h2>Controlling a generator exhaustion</h2>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Bank</span><span class="pun">():</span><span class="pln"> </span><span class="com"># Let's create a bank, building ATMs</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    crisis </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">False</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    </span><span class="kwd">def</span><span class="pln"> create_atm</span><span class="pun">(</span><span class="pln">self</span><span class="pun">):</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">        </span><span class="kwd">while</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">crisis</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">            </span><span class="kwd">yield</span><span class="pln"> </span><span class="str">"$100"</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> hsbc </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Bank</span><span class="pun">()</span><span class="pln"> </span><span class="com"># When everything's ok the ATM gives you as much as you want</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> corner_street_atm </span><span class="pun">=</span><span class="pln"> hsbc</span><span class="pun">.</span><span class="pln">create_atm</span><span class="pun">()</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">corner_street_atm</span><span class="pun">.</span><span class="pln">next</span><span class="pun">())</span><span class="pln">
+$100
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">corner_street_atm</span><span class="pun">.</span><span class="pln">next</span><span class="pun">())</span><span class="pln">
+$100
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">([</span><span class="pln">corner_street_atm</span><span class="pun">.</span><span class="pln">next</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> cash </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">5</span><span class="pun">)])</span><span class="pln">
+</span><span class="pun">[</span><span class="str">'$100'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$100'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$100'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$100'</span><span class="pun">,</span><span class="pln"> </span><span class="str">'$100'</span><span class="pun">]</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> hsbc</span><span class="pun">.</span><span class="pln">crisis </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">True</span><span class="pln"> </span><span class="com"># Crisis is coming, no more money!</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">corner_street_atm</span><span class="pun">.</span><span class="pln">next</span><span class="pun">())</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">type </span><span class="str">'exceptions.StopIteration'</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> wall_street_atm </span><span class="pun">=</span><span class="pln"> hsbc</span><span class="pun">.</span><span class="pln">create_atm</span><span class="pun">()</span><span class="pln"> </span><span class="com"># It's even true for new ATMs</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">wall_street_atm</span><span class="pun">.</span><span class="pln">next</span><span class="pun">())</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">type </span><span class="str">'exceptions.StopIteration'</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> hsbc</span><span class="pun">.</span><span class="pln">crisis </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">False</span><span class="pln"> </span><span class="com"># The trouble is, even post-crisis the ATM remains empty</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">corner_street_atm</span><span class="pun">.</span><span class="pln">next</span><span class="pun">())</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">type </span><span class="str">'exceptions.StopIteration'</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> brand_new_atm </span><span class="pun">=</span><span class="pln"> hsbc</span><span class="pun">.</span><span class="pln">create_atm</span><span class="pun">()</span><span class="pln"> </span><span class="com"># Build a new one to get back in business</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> cash </span><span class="kwd">in</span><span class="pln"> brand_new_atm</span><span class="pun">:</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">    </span><span class="kwd">print</span><span class="pln"> cash
+$100
+$100
+$100
+$100
+$100
+$100
+$100
+$100
+$100
+</span><span class="pun">...</span></code></pre>
+
+<p><strong>Note:</strong> For Python 3, use<code>print(corner_street_atm.__next__())</code> or <code>print(next(corner_street_atm))</code></p>
+
+<p>It can be useful for various things like controlling access to a resource.</p>
+
+<h2>Itertools, your best friend</h2>
+
+<p>The itertools module contains special functions to manipulate iterables. Ever wish to duplicate a generator?
+Chain two generators? Group values in a nested list with a one-liner? <code>Map / Zip</code> without creating another list?</p>
+
+<p>Then just <code>import itertools</code>.</p>
+
+<p>An example? Let's see the possible orders of arrival for a four-horse race:</p>
+
+<pre class="lang-py prettyprint prettyprinted" style=""><code><span class="pun">&gt;&gt;&gt;</span><span class="pln"> horses </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">]</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> races </span><span class="pun">=</span><span class="pln"> itertools</span><span class="pun">.</span><span class="pln">permutations</span><span class="pun">(</span><span class="pln">horses</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">races</span><span class="pun">)</span><span class="pln">
+</span><span class="pun">&lt;</span><span class="pln">itertools</span><span class="pun">.</span><span class="pln">permutations object at </span><span class="lit">0xb754f1dc</span><span class="pun">&gt;</span><span class="pln">
+</span><span class="pun">&gt;&gt;&gt;</span><span class="pln"> </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">list</span><span class="pun">(</span><span class="pln">itertools</span><span class="pun">.</span><span class="pln">permutations</span><span class="pun">(</span><span class="pln">horses</span><span class="pun">)))</span><span class="pln">
+</span><span class="pun">[(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">),</span><span class="pln">
+ </span><span class="pun">(</span><span class="lit">4</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)]</span></code></pre>
+
+<h2>Understanding the inner mechanisms of iteration</h2>
+
+<p>Iteration is a process implying iterables (implementing the <code>__iter__()</code> method) and iterators (implementing the <code>__next__()</code> method).
+Iterables are any objects you can get an iterator from. Iterators are objects that let you iterate on iterables.</p>
+
+<p>There is more about it in this article about <a href="http://effbot.org/zone/python-for-statement.htm" rel="noreferrer">how <code>for</code> loops work</a>.</p>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+        <time itemprop="dateCreated" datetime="2008-10-23T22:48:44"></time>
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="/a/231855/9164497" title="short permalink to this answer" class="short-link" itemprop="url" id="link-post-231855">share</a><span class="lsep">|</span><a href="/posts/231855/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </div>
+    <div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="/posts/231855/revisions" title="show all edits to this post">edited <span title="2019-05-02 19:34:54Z" class="relativetime">May 2 at 19:34</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/7583953/alec-a"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/C6iDW.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/7583953/alec-a">alec_a</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,282</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="10 silver badges"><span class="badge2"></span><span class="badgecount">10</span></span><span title="35 bronze badges"><span class="badge3"></span><span class="badgecount">35</span></span>
+        </div>
+    </div>
+</div>    </div>
+
+
+
+    <div class="post-signature grid--cell fl0">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2008-10-23 22:48:44Z" class="relativetime">Oct 23 '08 at 22:48</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/9951/e-satis"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/1449ec95d8c114dbca53136cc8194b61?s=32&amp;d=identicon&amp;r=PG&amp;f=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+        <a href="/users/9951/e-satis">e-satis</a><span class="d-none" itemprop="name">e-satis</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 365,907" dir="ltr">366k</span><span title="98 gold badges"><span class="badge1"></span><span class="badgecount">98</span></span><span title="265 silver badges"><span class="badge2"></span><span class="badgecount">265</span></span><span title="310 bronze badges"><span class="badge3"></span><span class="badgecount">310</span></span>
+        </div>
+    </div>
+</div>
+
+    </div>
+    </div>
+
+</div>
+
+
+    <div class="post-layout--right">
+	    <div id="comments-231855" class="comments js-comments-container " data-post-id="231855">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+    <li id="comment-45956083" class="comment js-comment " data-comment-id="45956083">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+                    <span title="number of 'useful comment' votes received" class="supernova">107</span>
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+
+                <span class="comment-copy"><b>All</b> iterators can only be iterated over once, not just those produced by generator functions.  If you don't believe me, call <code>iter()</code> on any iterable object and try to iterate over the result more than once.</span>
+
+                    –&nbsp;<a href="/users/2572431/augurar" title="5,594 reputation" class="comment-user">augurar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment45956083_231855"><span title="2015-03-03 22:54:31Z" class="relativetime-clean">Mar 3 '15 at 22:54</span></a></span>
+                                                            </div>
+        </div>
+    </li>
+    <li id="comment-52268168" class="comment js-comment " data-comment-id="52268168">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+                    <span title="number of 'useful comment' votes received" class="supernova">38</span>
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+
+                <span class="comment-copy">@Craicerjack You have your terms mixed up.  An iterable is something with an <code>__iter__</code> method.  An iterator is the result of calling <code>iter()</code> on an iterable.  Iterators can only be iterated over once.</span>
+
+                    –&nbsp;<a href="/users/2572431/augurar" title="5,594 reputation" class="comment-user">augurar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment52268168_231855"><span title="2015-08-24 20:52:18Z" class="relativetime-clean">Aug 24 '15 at 20:52</span></a></span>
+                                                            </div>
+        </div>
+    </li>
+    <li id="comment-75308701" class="comment js-comment " data-comment-id="75308701">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+                    <span title="number of 'useful comment' votes received" class="supernova">239</span>
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+
+                <span class="comment-copy"><code>yield</code> is not as magical this answer suggests. When you call a function that contains a <code>yield</code> statement anywhere, you get a generator object, but no code runs. Then each time you extract an object from the generator, Python executes code in the function until it comes to a <code>yield</code> statement, then pauses and delivers the object. When you extract another object, Python resumes just after the <code>yield</code> and continues until it reaches another <code>yield</code> (often the same one, but one iteration later). This continues until the function runs off the end, at which point the generator is deemed exhausted.</span>
+
+                    –&nbsp;<a href="/users/3830997/matthias-fripp" title="7,685 reputation" class="comment-user">Matthias Fripp</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment75308701_231855"><span title="2017-05-23 21:41:53Z" class="relativetime-clean">May 23 '17 at 21:41</span></a></span>
+                                                            </div>
+        </div>
+    </li>
+    <li id="comment-84633217" class="comment js-comment " data-comment-id="84633217">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score js-comment-edit-hide">
+                    <span title="number of 'useful comment' votes received" class="warm">8</span>
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body js-comment-edit-hide">
+
+                <span class="comment-copy">"These iterables are handy... but you store all the values in memory and this is not always what you want", is either wrong or confusing. An iterable returns an iterator upon calling the iter() on the iterable, and an iterator doesn't always have to store its values in memory, depending on the implementation of the <b>iter</b> method, it can also generate values in the sequence on demand.</span>
+
+                    –&nbsp;<a href="/users/557022/picmate-%e6%b6%85" title="1,861 reputation" class="comment-user">picmate 涅</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="#comment84633217_231855"><span title="2018-02-15 19:21:11Z" class="relativetime-clean">Feb 15 '18 at 19:21</span></a></span>
+                                                            </div>
+        </div>
+    </li>
+            </ul>
+	    </div>
+
+        <div id="comments-link-231855" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="#" onclick=""></a>
+        </div>
+    </div>    </div>
