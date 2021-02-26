@@ -7,7 +7,7 @@ verify_ssl = true
 pylint = "*"
 
 [packages]
-aiohttp = "==3.5.4"
+aiohttp = "==3.7.4"
 apscheduler = "==3.2.0"
 asn1crypto = "==0.24.0"
 async-timeout = "==3.0.1"
